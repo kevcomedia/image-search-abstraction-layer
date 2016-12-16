@@ -5,18 +5,18 @@ module.exports = function(models) {
   const api = express.Router();
 
   api.get('/imagesearch/:searchString', function(req, res) {
-    const searchUrl = 'https://www.googleapis.com/customsearch/v1?'
-      + `&q=${req.params.searchString}`
-      + '&searchType=image'
-      + `&cx=${process.env.SEARCH_ENGINE_ID}`
-      + `&key=${process.env.API_KEY}`
-      + (req.query.offset ? `&start=${req.query.offset}` : '');
-
     models.Recent.create({
       query: req.params.searchString,
       timestamp: new Date()
     })
     .then(function fulfilled() {
+      const searchUrl = 'https://www.googleapis.com/customsearch/v1?'
+        + `&q=${req.params.searchString}`
+        + '&searchType=image'
+        + `&cx=${process.env.SEARCH_ENGINE_ID}`
+        + `&key=${process.env.API_KEY}`
+        + (req.query.offset ? `&start=${req.query.offset}` : '');
+
       request(searchUrl, function(err, response, body) {
         // TODO write a better way to handle `err`
         if (err) return console.error('hi', err);
