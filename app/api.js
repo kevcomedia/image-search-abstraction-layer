@@ -13,7 +13,14 @@ module.exports = function() {
     request(searchUrl, function(err, response, body) {
       // TODO write a better way to handle `err`
       if (err) return console.error('hi', err);
-      res.json(JSON.parse(body).items);
+
+      var json = JSON.parse(body).items
+        .map(o => ({
+          imageUrl: o.link,
+          altText: o.snippet,
+          pageUrl: o.image.contextLink
+        }));
+      res.json(json);
     });
   });
 
