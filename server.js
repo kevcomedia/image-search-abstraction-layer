@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const api = require('./app/api')();
+const models = require('./models/models')(process.env.MLAB_URI || 'mongodb://localhost:27017/image-search');
+const api = require('./app/api')(models);
 
 const port = process.env.PORT || 8080;
 
