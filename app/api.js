@@ -12,10 +12,10 @@ module.exports = function(models) {
       + `&key=${process.env.API_KEY}`
       + (req.query.offset ? `&start=${req.query.offset}` : '');
 
-    Promise.resolve(models.Recent.create({
+    models.Recent.create({
       query: req.params.searchString,
       timestamp: new Date()
-    }))
+    })
     .then(function fulfilled() {
       request(searchUrl, function(err, response, body) {
         // TODO write a better way to handle `err`
