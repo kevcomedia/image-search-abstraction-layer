@@ -18,6 +18,7 @@
   "homepage": "https://github.com/kevcomedia/image-search-abstraction-layer#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "mongoose": "^4.7.1"
+    "mongoose": "^4.7.1",
+    "request": "^2.79.0"
   }
 }
