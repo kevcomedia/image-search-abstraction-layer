@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 module.exports = function(dbUri) {
+  mongoose.Promise = global.Promise;
   mongoose.connect(dbUri);
 
   const schema = new mongoose.Schema({
