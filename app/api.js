@@ -22,7 +22,7 @@ module.exports = function(models) {
 
       request(searchUrl, function(err, response, body) {
         if (err) {
-          console.error('An error occured while sending a request to Google.');
+          console.error(new Date(), 'An error occured while sending a request to Google.');
           console.error(err);
           return res.status(500).send('An error occured while processing your request.');
         }
@@ -47,7 +47,7 @@ module.exports = function(models) {
     models.Recent.find({}, projection).sort({timestamp: -1}).limit(10).exec(function(err, docs) {
       if (err) {
         const message = 'An error occured while looking up recent searches.';
-        console.error(message);
+        console.error(new Date(), message);
         console.error(err);
         return res.status(500).send(message);
       }
