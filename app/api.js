@@ -27,12 +27,20 @@ module.exports = function(models) {
           return res.status(500).send('An error occured while processing your request.');
         }
 
-        var json = JSON.parse(body).items
-          .map(o => ({
-            imageUrl: o.link,
-            altText: o.snippet,
-            pageUrl: o.image.contextLink
-          }));
+        const bodyJSON = JSON.parse(body);
+        if (!bodyJSON.items) {
+          console.error(new Date(), 'There are no items to show');
+          console.error('body:', body);
+          console.error('search string:', req.params.searchString);
+          console.error('offset:', req.query.offset);
+          return res.status(bodyJSON.error.code).json({error: bodyJSON.error.message});
+        }
+
+        const json = bodyJSON.items.map(o => ({
+          imageUrl: o.link,
+          altText: o.snippet,
+          pageUrl: o.image.contextLink
+        }));
         res.json(json);
       });
     });
