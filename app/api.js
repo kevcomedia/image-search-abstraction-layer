@@ -45,8 +45,13 @@ module.exports = function(models) {
       _id: 0
     };
     models.Recent.find({}, projection).sort({timestamp: -1}).limit(10).exec(function(err, docs) {
-      // TODO write a better way to deal with `err`
-      if (err) throw err;
+      if (err) {
+        const message = 'An error occured while looking up recent searches.';
+        console.error(message);
+        console.error(err);
+        return res.status(500).send(message);
+      }
+
       res.json(docs);
     });
   });
