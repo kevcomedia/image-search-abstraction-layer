@@ -21,8 +21,11 @@ module.exports = function(models) {
       }
 
       request(searchUrl, function(err, response, body) {
-        // TODO write a better way to handle `err`
-        if (err) return console.error('hi', err);
+        if (err) {
+          console.error('An error occured while sending a request to Google.');
+          console.error(err);
+          return res.status(500).send('An error occured while processing your request.');
+        }
 
         var json = JSON.parse(body).items
           .map(o => ({
