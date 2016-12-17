@@ -10,12 +10,15 @@ module.exports = function(models) {
       timestamp: new Date()
     })
     .then(function fulfilled() {
-      const searchUrl = 'https://www.googleapis.com/customsearch/v1?'
+      var searchUrl = 'https://www.googleapis.com/customsearch/v1?'
         + `&q=${req.params.searchString}`
         + '&searchType=image'
         + `&cx=${process.env.SEARCH_ENGINE_ID}`
-        + `&key=${process.env.API_KEY}`
-        + (req.query.offset ? `&start=${req.query.offset}` : '');
+        + `&key=${process.env.API_KEY}`;
+
+      if (req.query.offset && /^\d+$/.test(req.query.offset)) {
+        searchUrl += `&start=${req.query.offset}`;
+      }
 
       request(searchUrl, function(err, response, body) {
         // TODO write a better way to handle `err`
