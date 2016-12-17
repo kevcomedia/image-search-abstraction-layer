@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Image Search Abstraction Layer</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1>Image Search Abstraction Layer</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <section class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Image search</h3>
+          </div>
+          <div class="panel-body">
+            <p class="lead"><code>/api/v1/imagesearch/<b>search-term</b>[?offset=<b>number</b>]</code></p>
+
+            <h4>Examples</h4>
+            <p><code>/api/v1/imagesearch/tuna%20sandwich</code></p>
+            <p><code>/api/v1/imagesearch/funny%20tuna?offset=2</code></p>
+
+            <h4>Output</h4>
+            <p>An array of ten results with the following details:</p>
+            <dl class="dl-horizontal">
+              <dt><code>imageUrl</code></dt>
+              <dd>A URL that points to the image.</dd>
+              <dt><code>altText</code></dt>
+              <dd>The image's alt text in the web page it appears in.</dd>
+              <dt><code>pageUrl</code></dt>
+              <dd>A URL that points to a page that contains the image.</dd>
+            </dl>
+          </div>
+        </section>
+      </div>
+      <div class="col-md-6">
+        <section class="panel panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title">Recent searches</h3>
+          </div>
+          <div class="panel-body">
+            <p class="lead"><code>/api/v1/recent</code></p>
+
+            <h4>Output</h4>
+            <p>An array of the last ten search terms and their respective timestamps</p>
+            <dl class="dl-horizontal">
+              <dt><code>query</code></dt>
+              <dd>The search term.</dd>
+              <dt><code>timestamp</code></dt>
+              <dd>The date and time that search was made.</dd>
+            </dl>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
