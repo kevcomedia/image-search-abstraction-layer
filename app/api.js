@@ -10,15 +10,7 @@ module.exports = function(models) {
       timestamp: new Date()
     })
     .then(function fulfilled() {
-      var searchUrl = 'https://www.googleapis.com/customsearch/v1?'
-        + `&q=${req.params.searchString}`
-        + '&searchType=image'
-        + `&cx=${process.env.SEARCH_ENGINE_ID}`
-        + `&key=${process.env.API_KEY}`;
-
-      if (req.query.offset && /^\d+$/.test(req.query.offset)) {
-        searchUrl += `&start=${req.query.offset}`;
-      }
+      var searchUrl = require('../utils/search-url')(req.params.searchString, req.query.offset);
 
       request(searchUrl, function(err, response, body) {
         if (err) {
